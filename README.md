@@ -8,10 +8,10 @@ The below tasks have been accomplished
 - Logging using Serilog
 
 API Endpoints
-http://localhost:22214/api/Blog/CreateBlog
-http://localhost:22214/api/Blog/CreateUser
-http://localhost:22214/api/Blog/GetAllUsers
-http://localhost:22214/api/Blog/GetAllBlogs
-http://localhost:22214/api/Blog/GetAllBlogCount
-http://localhost:22214/api/Blog/GetBlogCountByAuthor?firstName=
-http://localhost:22214/api/Blog/GetWordCountByAuthor?firstName=&lastName=
+- http://localhost:22214/api/Blog/CreateBlog
+- http://localhost:22214/api/Blog/CreateUser
+- http://localhost:22214/api/Blog/GetAllUsers
+- http://localhost:22214/api/Blog/GetAllBlogs
+- http://localhost:22214/api/Blog/GetAllBlogCount
+- http://localhost:22214/api/Blog/GetBlogCountByAuthor?firstName=
+- http://localhost:22214/api/Blog/GetWordCountByAuthor?firstName=&lastName=
