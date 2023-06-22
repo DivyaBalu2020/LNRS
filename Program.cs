@@ -5,6 +5,9 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver.Core.Configuration;
 using Serilog.Events;
 using Serilog;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,22 @@ builder.Services.Configure<DatabaseSettings>(
 
 builder.Services.AddSingleton<IDatabaseSettings>(sp =>
         sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+
+builder.Services.AddAuthentication(opt => {
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options => {
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],        
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+    };
+});
 
 Log.Logger = new LoggerConfiguration()
          .MinimumLevel.Debug()
@@ -42,6 +61,8 @@ else
 }
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

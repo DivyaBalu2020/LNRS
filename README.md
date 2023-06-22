@@ -6,6 +6,7 @@ The below tasks have been accomplished
 - An API that can create and retrieve ‘Blogs’ and ‘Users’  
 - An author would like to see a total count of all their words.
 - Logging using Serilog
+- JWT Authentication minimum implementation
 
 API Endpoints
 - http://localhost:22214/api/Blog/CreateBlog
